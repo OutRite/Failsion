@@ -1,0 +1,50 @@
+// ResFail -- Crashes Fuze by switching the resolution to unsupported, potentially OOB numbers (We miiiiiight be writing data OOB??)
+
+// This should be distributed via:
+// A] Manually typed out
+// B] Injected via *brew
+// C] Shared to a friend
+
+// DO NOT DISTRIBUTE VIA PROJECT ID NO MATTER WHAT
+
+// At the end the GNU GPL v3 will be included and it is recommended you get/distribute it using method B or C, but in A you shouldn't distribute it, just in case.
+
+// a small, base resolution (here 240p)
+setMode(426, 240)
+
+// rate of increased (higher is faster but more unstable)
+
+rate = 95 // seems to crash every time, while 100 "successfully" errors, and 90 just flashes, no crash
+
+// lets create some cubes, just to use a bit of memory
+
+for i = 0 to 10 loop
+    placeObject(pyramid, {random(4)+1, random(4)+1, random(i)+1}, {random(4)+1, random(4)+1, random(i)+1})
+repeat
+
+crashcube = placeObject(cube, {0, 0, 0}, {5, 5, 5})
+nicecube = placeObject(cube, {0, 0, 0}, {random(4)+1, random(4)+1, random(4)+1})
+coolcube = placeObject(cube, {0, 0, 0}, {6, 6, 5})
+sadcube = placeObject(cube, {0, 0, 0}, {4, 5, 3})
+
+// we should be able to see the cubes, at least to see if they glitch out
+
+setCamera({10, 10, 10}, {0, 0, 0})
+
+// now, let's draw everything
+
+loop
+    clear() // remove everything
+    drawObjects() // buffer the cubes into memory
+    update() // put it onto the screen
+    // crash after a couple of iterations
+    if gwidth() < 1000 then // anti error
+        if gheight() < 1000 then
+            setmode(gwidth()+rate, gheight()+rate)
+        else
+            setmode(gwidth()+(rate/2), 1)
+        endif
+    else
+        setmode(1, gheight()+(rate/2))
+    endif
+repeat // if it doesn't work at first, try, try again.
