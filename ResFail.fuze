@@ -7,7 +7,7 @@
 
 // DO NOT DISTRIBUTE VIA PROJECT ID NO MATTER WHAT
 
-// At the end the GNU GPL v3 will be included and it is recommended you get/distribute it using method B or C, but in A you shouldn't distribute it, just in case.
+// The GNU GPL V3 should be included with ResFail.fuze. Otherwise, do not trust this copy.
 
 // a small, base resolution (here 240p)
 setMode(426, 240)
